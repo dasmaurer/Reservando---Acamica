@@ -4,7 +4,7 @@ var expect = chai.expect;
 
 // Paso 2: Testeá la función reservarHorario(horario) ///////////////////////////////////////////////////////////////////////////////////
 
-describe("testear funcionalidades de reservarHorario()", function() {
+describe("Testear funcionalidades de reservarHorario()", function() {
 
     var restaurantTest;
     beforeEach(function() {
@@ -39,7 +39,7 @@ describe("testear funcionalidades de reservarHorario()", function() {
 
 // Paso 3: Testeá la función obtenerPuntuación()  ///////////////////////////////////////////////////////////////////////////////////////////
 
-describe("testear funcionalidades de obtenerPuntuacion()", function() {
+describe("Testear funcionalidades de obtenerPuntuacion()", function() {
 
     // Dado un restaurant con determinadas calificaciones, la puntuación (que es el promedio de ellas) se calcula correctamente.
     it("Debería calcular correctamente el promedio", function() {
@@ -73,7 +73,7 @@ describe("testear funcionalidades de obtenerPuntuacion()", function() {
 
 // Paso 4: Testeá la función calificar()  ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-describe("testear funcionalidades de calificar()", function(){
+describe("Testear funcionalidades de calificar()", function(){
     var restaurantTest;
     beforeEach(function() {
         restaurantTest = new Restaurant (
@@ -109,8 +109,52 @@ expect(restaurantTest.calificaciones).to.eql([9, 5, 7, 6, 7]);
 });
 
 // Paso 5: Testeá la función buscarRestaurante(id)  ////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
+describe("Testear de funcionalidades de buscarRestaurante()", function(){
+    it("Deberia buscar el restaurante por el id en la lista de restaurantes", function(){
+      var listadoRestaurantesTest = [
+        new Restaurant(
+          1,
+          "TAO Uptown",
+          "Asiática",
+          "Nueva York",
+          ["13:00", "15:30", "18:00"],
+          "../img/asiatica1.jpg",
+          [6, 7, 9, 10, 5]
+        ),
+        new Restaurant(
+          2,
+          "Mandarín Kitchen",
+          "Asiática",
+          "Londres",
+          ["15:00", "14:30", "12:30"],
+          "../img/asiatica2.jpg",
+          [7, 7, 3, 9, 7]
+        )
+      ];
+  
+      var restauranteBuscado =   new Restaurant(
+        2,
+        "Mandarín Kitchen",
+        "Asiática",
+        "Londres",
+        ["15:00", "14:30", "12:30"],
+        "../img/asiatica2.jpg",
+        [7, 7, 3, 9, 7]
+      )
+  
+      listadoRestaurantesTest = new Listado(listadoRestaurantesTest);
+      expect(listadoRestaurantesTest.buscarRestaurante(2)).to.eql(restauranteBuscado);
+    });
+  });
 
 // Paso 6: Testeá la función obtenerRestaurantes()  ////////////////////////////////////////////////////////////////////////////////////////////////////
+describe("Testear funcionalidades de obtenerRestaurantes()", function(){
+    it("Debería devolver un listado de restaurantes si se pasan todos los datos filtrados", function(){
+        var restaurantes = listado.obtenerRestaurantes('Pasta', 'Roma', '13:00');
+        expect(restaurantes[0].nombre).to.equal('Osteria Da Fortunata');
+    });
+    it("Debería no devolver resultados si los filtros estan vacíos", function(){
+        var restaurantes = listado.obtenerRestaurantes('13:00');
+      expect(restaurantes.length).to.equal(0);
+    });
+});
