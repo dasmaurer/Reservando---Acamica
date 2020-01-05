@@ -5,7 +5,7 @@ var expect = chai.expect;
 // Paso 2: Testeá la función reservarHorario(horario) ///////////////////////////////////////////////////////////////////////////////////
 
 describe("testear funcionalidades de reservarHorario()", function() {
-    
+
     var restaurantTest;
     beforeEach(function() {
        restaurantTest = new Restaurant (
@@ -51,13 +51,22 @@ describe("testear funcionalidades de obtenerPuntuacion()", function() {
             ["17:00", "19:00", "22:30"], 
             "../img/ensalada4.jpg", 
             [8, 8, 8, 8, 5, 7]);
-
+          //restaurantTest.calificaciones = [8, 8, 8, 8, 5, 7];
+            expect(restaurantTest.obtenerPuntuacion()).to.equal(7.3);
     });
 
 
     // Dado un restaurant que no tiene ninguna calificación, la puntuación es igual a 0.
     it("Debería mostrar puntuación 0 para restaurantes no calificados", function(){
-
+        var restaurantTest = new Restaurant (
+            1000, 
+            "new Restaurant", 
+            "new Restaurant Comida", 
+            "new Restaurant Ciudad", 
+            ["horario1", "horario2", "horario3"], 
+            "../img/xxxxx.jpg", 
+            []);
+        expect(restaurantTest.obtenerPuntuacion()).to.equal(0);
     })
 });
 
@@ -65,8 +74,38 @@ describe("testear funcionalidades de obtenerPuntuacion()", function() {
 // Paso 4: Testeá la función calificar()  ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 describe("testear funcionalidades de calificar()", function(){
+    var restaurantTest;
+    beforeEach(function() {
+        restaurantTest = new Restaurant (
+            24, 
+            "Maison Kayser", 
+            "Desayuno", 
+            "Nueva York", 
+            ["21:00", "22:30", "15:00"], 
+            "../img/desayuno2.jpg", 
+            [9, 5, 7, 6, 7]);
+    });
+    it("Debería no sumar valor al array si la calificación es un número menor a 0", function(){
+restaurantTest.calificar(-1);
+expect(restaurantTest.calificaciones).to.eql([9, 5, 7, 6, 7]);
 
-
+    });
+    it("Debería no sumar valor al array si es un número mayor a 10", function(){
+        restaurantTest.calificar(11);
+        expect(restaurantTest.calificaciones).to.eql([9, 5, 7, 6, 7]);
+    });
+    it("Debería sumar una calificación al array calificaciones si el número está entre 0 y 10", function(){
+        restaurantTest.calificar(7);
+        expect(restaurantTest.calificaciones).to.eql([9, 5, 7, 6, 7, 7]);
+    });
+    it("Debería no sumar una calificación al array calificaciones si el valor no es un número", function(){
+        restaurantTest.calificar("a");
+        expect(restaurantTest.calificaciones).to.eql([9, 5, 7, 6, 7]);
+    });
+    it("Si no se califica no debería modificar el array calificaciones", function(){
+        restaurantTest.calificar();
+        expect(restaurantTest.calificaciones).to.eql([9, 5, 7, 6, 7]);
+    });
 });
 
 // Paso 5: Testeá la función buscarRestaurante(id)  ////////////////////////////////////////////////////////////////////////////////////////////////////
