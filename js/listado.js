@@ -35,10 +35,7 @@ Listado.prototype.obtenerUbicaciones = function() {
         ciudades.push(this.restaurantes[i].ubicacion);
     }
     //Se crea un nuevo array donde se van a agregar las ciudades pero sin repetirse
-    var ciudadesFiltradas = ciudades.filter(function(elem, index, self) {
-        return index === self.indexOf(elem);
-    });
-
+    var ciudadesFiltradas = filtrarArreglos(ciudades);
     return ciudadesFiltradas.sort();
 }
 
@@ -49,10 +46,7 @@ Listado.prototype.obtenerRubros = function() {
         rubros.push(this.restaurantes[i].rubro);
     }
 
-    var rubrosFiltrados = rubros.filter(function(elem, index, self) {
-        return index === self.indexOf(elem);
-    });
-
+    var rubrosFiltrados = filtrarArreglos(rubros);
     return rubrosFiltrados.sort();
 }
 
@@ -76,12 +70,27 @@ Listado.prototype.obtenerHorarios = function() {
     });
 
     //En este arreglo vamos a poner todos los horarios pero sin repetidos
-    var horariosFiltrados = horarios.filter(function(elem, index, self) {
-        return index === self.indexOf(elem);
-    });
-
+    var horariosFiltrados = filtrarArreglos(horarios);
     return horariosFiltrados.sort();
+};
+
+
+
+/////// Paso 4: Eliminá la repetición de código en obtenerRubros(), obtenerUbicaciones() y obtenerHorarios().   //////////////////////////////////////////////////
+
+function filtrarArreglos (Arreglo) {
+    var arregloFiltrado = Arreglo.filter(function(elem, index, self) {
+        return index === self.indexOf(elem);
+    })
+    return arregloFiltrado;
 }
+
+
+
+
+
+
+
 
 //Función que recibe los filtros que llegan desde el HTML y filtra el arreglo de restaurantes.
 //Solo se filtra si el valor recibido es distinto de null.
