@@ -17,14 +17,18 @@ Listado.prototype.calificarRestaurant = function(id, calificacion) {
 }
 
 //Dado un id, busca el objeto del listado que tiene ese id
+
 Listado.prototype.buscarRestaurante = function(id) {
-    for (var i = 0; i < this.restaurantes.length; i++) {
-        if (this.restaurantes[i].id === id) {
-            return this.restaurantes[i]
-        }
+    var RestaurantIdentificado = this.restaurantes.find(function(restaurante) {
+        return restaurante.id === id;
+    })
+    if (RestaurantIdentificado) {
+        return RestaurantIdentificado;
+    } else {
+      return "No se ha encontrado ningún restaurant";
     }
-    return "No se ha encontrado ningún restaurant";
 }
+
 
 //Obtiene todas las ciudades de los restaurantes sin repetidos
 Listado.prototype.obtenerUbicaciones = function() {
