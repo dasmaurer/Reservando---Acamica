@@ -161,3 +161,17 @@ describe("Testear funcionalidades de obtenerRestaurantes()", function(){
 
 // OBJETO Reserva   Paso 2 - Green: Escribí el código mínimo e indispensable para que las pruebas pasen  ///////////////////////////////////////////////
 
+describe("Testear de funcionalidades de PrecioBase()", () => {
+    it("Si realizo una reserva valida, obtener el precio base", () => {
+      var reserva1 = new Reserva(new Date(2018, 7, 24, 11, 00), 8, 350, "DES1");
+  
+      expect(reserva1.calcularPrecioBase()).to.equal(2800);
+    });
+});
+
+  describe("Testear de funcionalidades de PrecioTotal()", () => {
+    it("Si realizo una reserva valida, obtener el precio total", () => {
+      var reserva1 = new Reserva(new Date(2018, 7, 24, 11, 00), 8, 350, "DES1");
+      expect(reserva1.calcularPrecioTotal()).to.equal(2450);
+    });
+  })
