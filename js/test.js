@@ -158,3 +158,6 @@ describe("Testear funcionalidades de obtenerRestaurantes()", function(){
       expect(restaurantes.length).to.equal(0);
     });
 });
+
+// OBJETO Reserva   Paso 2 - Green: Escribí el código mínimo e indispensable para que las pruebas pasen  ///////////////////////////////////////////////
+
